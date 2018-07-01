@@ -1,7 +1,7 @@
 {
   "main": "server/server.js",
   "scripts": {
-    "init": "yarn install && yarn install --prefix client",
+    "init": "yarn install && yarn --cwd client install",
     "start": "node server/server.js",
     "server": "nodemon server/server.js",
     "client": "yarn --cwd client start",
