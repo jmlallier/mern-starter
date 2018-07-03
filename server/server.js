@@ -1,14 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-
-const items = require("./routes/api/items");
+const cors = require("cors");
 
 const app = express();
+const items = require("./routes/api/items");
+const users = require("./routes/api/users");
+require("./config/passport");
 
+app.use(cors());
 app.use(bodyParser.json());
 
-const serverConfig = require("./config");
+const serverConfig = require("./config").server;
 const dummyData = require("./dummyData");
 
 // Set native promises as mongoose promise
@@ -33,6 +36,7 @@ mongoose
   .catch(err => console.log(err));
 
 app.use("/api/items", items);
+app.use("/api/users", users);
 
 app.get("/", (req, res) => {
   res.send(`Success`);
